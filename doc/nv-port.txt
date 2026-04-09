@@ -1,18 +1,26 @@
-*nv-port.txt*    For Neovim >= 0.9.0
+*nv-port.txt*    For Neovim >= 0.10.0
 
 ==============================================================================
 CONTENTS                                                    *nv-port-contents*
 
     1. Introduction ........................... |nv-port-introduction|
     2. Setup .................................. |nv-port-setup|
-    3. Configuration .......................... |nv-port-configuration|
-    4. Commands ............................... |nv-port-commands|
+    3. Commands ............................... |nv-port-commands|
+    4. Configuration .......................... |nv-port-configuration|
     5. License ................................ |nv-port-license|
 
 ==============================================================================
 1. INTRODUCTION                                         *nv-port-introduction*
 
-nv-port is a Neovim plugin that ...
+NvPort is a Neovim plugin designed to make your environment portable across
+macOS, Linux, and Windows. It allows you to export your configuration into a
+ZIP archive and restore it on another machine with an equivalent experience.
+
+Phase 1 (MVP) supports:
+- Portable Mode export (config + lockfile + dependencies)
+- Inspection of archives
+- Import with 2-step verification (Preview -> Confirm)
+- Doctor diagnostics for the environment
 
 ==============================================================================
 2. SETUP                                                       *nv-port-setup*
@@ -20,43 +28,48 @@ nv-port is a Neovim plugin that ...
 Using lazy.nvim: >lua
     {
         "your-username/nv-port",
-        opts = {},
-    }
-<
-
-Using packer.nvim: >lua
-    use {
-        "your-username/nv-port",
-        config = function()
-            require("nv-port").setup()
-        end,
+        opts = {
+            output_dir = "~/nvport-exports",
+            default_mode = "portable",
+        },
     }
 <
 
 ==============================================================================
-3. CONFIGURATION                                       *nv-port-configuration*
+3. COMMANDS                                                 *nv-port-commands*
+
+:NvPort export [mode]                                         *:NvPort-export*
+    Export your Neovim environment to a ZIP archive.
+    Modes:
+    - portable (default): Cross-OS safe migration
+    - instant: Fast migration (same OS)
+    - full: Includes plugin source code (offline migration)
+
+:NvPort import {path} [--confirm]                             *:NvPort-import*
+    Import a NvPort archive.
+    Without --confirm: Displays a preview of changes and warnings.
+    With --confirm: Applies the configuration and lockfile.
+
+:NvPort inspect {path}                                       *:NvPort-inspect*
+    Show the contents and metadata of a ZIP archive in a floating window.
+
+:NvPort doctor                                                 *:NvPort-doctor*
+    Run environment diagnostics to check for missing dependencies (git, node,
+    clipboard, etc.).
+
+==============================================================================
+4. CONFIGURATION                                       *nv-port-configuration*
 
 Default configuration: >lua
     require("nv-port").setup({
-        option = "default",
+        output_dir = vim.fn.expand("~/nvport-exports"),
+        default_mode = "portable",
     })
 <
-
-Options ~
-
-option                                                     *nv-port-opt-option*
-    Type: `string`, Default: `"default"`
-    Example option description.
-
-==============================================================================
-4. COMMANDS                                                 *nv-port-commands*
-
-:NvPort                                                           *:NvPort*
-    Example command.
 
 ==============================================================================
 5. LICENSE                                                   *nv-port-license*
 
-MIT License. See LICENSE file in the repository root.
+MIT License.
 
 vim:tw=78:ts=8:ft=help:norl:

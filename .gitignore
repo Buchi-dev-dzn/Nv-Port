@@ -1,3 +1,7 @@
+# Project specific
+agent.md
+.gemini/
+
 # Dependencies (lazy.nvim, packer, etc.)
 .repro/
 
@@ -9,3 +13,7 @@
 .vscode/
 *.swp
 *.swo
+
+# Lua Rocks
+luarocksdata/
+.luarocks/
