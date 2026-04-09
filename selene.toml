@@ -1,4 +1,4 @@
-std = "vim+lua51"
+std = "vim"
 
 [lints]
 undefined_variable = "allow"
