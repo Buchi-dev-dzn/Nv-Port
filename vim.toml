@@ -1,0 +1,4 @@
+name = "vim"
+# Neovim global definitions for Selene
+[globals]
+vim = { any = true }

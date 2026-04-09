@@ -1,0 +1,5 @@
+name = "nv-port"
+std = "vim+lua51"
+
+[rules]
+undefined_variable = "allow"

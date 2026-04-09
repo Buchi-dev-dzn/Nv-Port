@@ -1,0 +1,11 @@
+# Dependencies (lazy.nvim, packer, etc.)
+.repro/
+
+# OS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

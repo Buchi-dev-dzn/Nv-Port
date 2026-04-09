@@ -1,0 +1,15 @@
+local nv_port = require("nv-port")
+
+describe("nv-port", function()
+  describe("setup()", function()
+    it("loads with default config", function()
+      nv_port.setup()
+      assert.are.equal("default", nv_port.config.option)
+    end)
+
+    it("overrides defaults with user config", function()
+      nv_port.setup({ option = "custom" })
+      assert.are.equal("custom", nv_port.config.option)
+    end)
+  end)
+end)
