@@ -152,9 +152,7 @@ local checks = {
     run = function()
       local adapter = adapters.get()
       if adapter.has_clipboard() then
-        local cmd = type(adapter.clipboard_cmd) == "function"
-          and adapter.clipboard_cmd()
-          or adapter.clipboard_cmd
+        local cmd = type(adapter.clipboard_cmd) == "function" and adapter.clipboard_cmd() or adapter.clipboard_cmd
         return "ok", "clipboard available" .. (cmd and (" via " .. cmd) or "")
       else
         return "error", "No clipboard tool found — yank/paste to system clipboard will not work"
@@ -247,10 +245,10 @@ function M.run()
   table.insert(lines, "")
   table.insert(lines, "---")
   table.insert(lines, "")
-  table.insert(lines, string.format(
-    "✅ %d  ⚠️  %d  ❌ %d  💡 %d",
-    counts.ok, counts.warn, counts.error, counts.info
-  ))
+  table.insert(
+    lines,
+    string.format("✅ %d  ⚠️  %d  ❌ %d  💡 %d", counts.ok, counts.warn, counts.error, counts.info)
+  )
 
   -- Overall verdict
   table.insert(lines, "")

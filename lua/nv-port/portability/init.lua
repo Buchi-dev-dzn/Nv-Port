@@ -117,7 +117,7 @@ M.patterns = {
   },
   {
     id = "shell_zsh_hardcoded",
-    pattern = 'shell%s*=%s*["\']/?usr/bin/zsh["\']',
+    pattern = "shell%s*=%s*[\"']/?usr/bin/zsh[\"']",
     reason = "Hardcoded zsh path — may not exist on all systems",
     suggestion = "Use vim.o.shell = vim.fn.exepath('zsh') or leave as default",
     auto_fixable = false,

@@ -14,8 +14,12 @@ local M = {}
 ---@param opts? { width?: integer, height?: integer }
 function M.show_float(lines, title, opts)
   opts = opts or {}
-  local width = opts.width or math.min(90, vim.o.columns - 4)
-  local height = opts.height or math.min(#lines + 2, vim.o.lines - 6)
+  -- Safety guards for small/headless terminals
+  local cols = vim.o.columns
+  local lines_total = vim.o.lines
+
+  local width = opts.width or math.min(90, math.max(20, cols - 4))
+  local height = opts.height or math.min(#lines + 2, math.max(10, lines_total - 6))
 
   -- Create a scratch buffer
   local buf = vim.api.nvim_create_buf(false, true)
@@ -24,14 +28,11 @@ function M.show_float(lines, title, opts)
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
   vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
 
-  -- Center the window
-  local row = math.floor((vim.o.lines - height) / 2)
-  local col = math.floor((vim.o.columns - width) / 2)
-
+  -- Window opts
   local win_opts = {
     relative = "editor",
-    row = row,
-    col = col,
+    row = math.max(0, math.floor((lines_total - height) / 2)),
+    col = math.max(0, math.floor((cols - width) / 2)),
     width = width,
     height = height,
     style = "minimal",
@@ -126,10 +127,17 @@ function M.export_report_lines(data)
       table.insert(lines, "")
       for _, w in ipairs(pw) do
         local short_file = vim.fn.fnamemodify(w.file, ":t")
-        table.insert(lines, string.format(
-          "- ⚠️  **%s** line %d — `%s`  \n  → %s  \n  💡 %s",
-          short_file, w.line, w.matched, w.reason, w.suggestion
-        ))
+        table.insert(
+          lines,
+          string.format(
+            "- ⚠️  **%s** line %d — `%s`  \n  → %s  \n  💡 %s",
+            short_file,
+            w.line,
+            w.matched,
+            w.reason,
+            w.suggestion
+          )
+        )
       end
       table.insert(lines, "")
     end
@@ -246,11 +254,14 @@ function M.import_preview_lines(manifest, dest_config_root, warnings, os_diff)
   if os_diff then
     table.insert(lines, "## ⚠️  OS Mismatch")
     table.insert(lines, "")
-    table.insert(lines, string.format(
-      "Source: **%s** → Current: **%s**",
-      manifest.source_os or "?",
-      vim.fn.has("mac") == 1 and "macos" or (vim.fn.has("win32") == 1 and "windows" or "linux")
-    ))
+    table.insert(
+      lines,
+      string.format(
+        "Source: **%s** → Current: **%s**",
+        manifest.source_os or "?",
+        vim.fn.has("mac") == 1 and "macos" or (vim.fn.has("win32") == 1 and "windows" or "linux")
+      )
+    )
     table.insert(lines, "")
     table.insert(lines, "Some OS-specific settings may not work correctly.")
     table.insert(lines, "Review portability warnings below.")

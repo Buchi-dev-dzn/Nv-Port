@@ -149,10 +149,7 @@ function M.export(mode, output_path)
     port_warnings = portability.scan_dir(util.config_path())
     local port_summary = portability.summarize(port_warnings)
     if port_summary.total > 0 then
-      util.warn(string.format(
-        "Found %d portability warning(s). Check the report for details.",
-        port_summary.total
-      ))
+      util.warn(string.format("Found %d portability warning(s). Check the report for details.", port_summary.total))
     end
   end
 
@@ -199,9 +196,7 @@ function M.export(mode, output_path)
 
   -- 8. Build archive
   util.notify("Building archive …")
-  local files_map = build_files_map(
-    mode, plugin_list, dep_results, port_warnings, manifest, report_md
-  )
+  local files_map = build_files_map(mode, plugin_list, dep_results, port_warnings, manifest, report_md)
 
   local ok, err = archive.create(files_map, dest_zip)
   if not ok then

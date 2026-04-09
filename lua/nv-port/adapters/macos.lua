@@ -23,7 +23,8 @@ M.lockfile_path = util.lazy_lockfile() or (util.data_path() .. "/lazy/lazy-lock.
 ---@param dest_zip string output zip path
 ---@return boolean ok, string|nil err
 function M.zip(src_dir, dest_zip)
-  local cmd = string.format("cd %s && zip -r %s . -x '*.DS_Store'", vim.fn.shellescape(src_dir), vim.fn.shellescape(dest_zip))
+  local cmd =
+    string.format("cd %s && zip -r %s . -x '*.DS_Store'", vim.fn.shellescape(src_dir), vim.fn.shellescape(dest_zip))
   local _, code = util.run(cmd)
   if code ~= 0 then
     return false, "zip command failed (exit code: " .. code .. ")"

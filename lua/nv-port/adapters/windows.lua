@@ -33,7 +33,7 @@ function M.zip(src_dir, dest_zip)
   if code ~= 0 then
     -- Fallback: try 7z if available
     if util.executable("7z") then
-      local cmd7z = string.format('7z a %s %s\\*', vim.fn.shellescape(dest_zip), vim.fn.shellescape(src_dir))
+      local cmd7z = string.format("7z a %s %s\\*", vim.fn.shellescape(dest_zip), vim.fn.shellescape(src_dir))
       local _, c2 = util.run(cmd7z)
       if c2 == 0 then
         return true, nil
@@ -57,7 +57,7 @@ function M.unzip(zip_path, dest_dir)
   local _, code = util.run(cmd)
   if code ~= 0 then
     if util.executable("7z") then
-      local cmd7z = string.format('7z x %s -o%s -y', vim.fn.shellescape(zip_path), vim.fn.shellescape(dest_dir))
+      local cmd7z = string.format("7z x %s -o%s -y", vim.fn.shellescape(zip_path), vim.fn.shellescape(dest_dir))
       local _, c2 = util.run(cmd7z)
       if c2 == 0 then
         return true, nil
@@ -77,7 +77,7 @@ function M.zip_list(zip_path)
   )
   -- Simpler: use powershell to list zip contents
   local cmd2 = string.format(
-    'powershell -NoProfile -Command "Add-Type -Assembly System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::OpenRead(\'%s\').Entries | Select-Object -ExpandProperty FullName"',
+    "powershell -NoProfile -Command \"Add-Type -Assembly System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::OpenRead('%s').Entries | Select-Object -ExpandProperty FullName\"",
     zip_path:gsub("/", "\\")
   )
   local out, _ = util.run(cmd2)
