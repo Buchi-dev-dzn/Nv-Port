@@ -1,5 +1,6 @@
 # NvPort 🚀
 
+[![Vibe Coded](https://img.shields.io/badge/Vibe-Coded-FF69B4?style=for-the-badge&logo=aira&logoColor=white)](https://github.com/Buchi-dev-dzn/Nv-Port)
 [![CI](https://github.com/Buchi-dev-dzn/Nv-Port/actions/workflows/ci.yml/badge.svg)](https://github.com/Buchi-dev-dzn/Nv-Port/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-pakage)](https://makeapullrequest.com)
