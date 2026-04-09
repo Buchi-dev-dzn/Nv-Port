@@ -21,7 +21,7 @@ jobs:
           args: --check lua/ plugin/ tests/
 
       - name: Lint with Selene
-        uses: NTBBloodbath/selene-action@v1.0.0
+        uses: kampfkarren/selene-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: lua/ plugin/
