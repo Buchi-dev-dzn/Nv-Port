@@ -1,4 +1,4 @@
-std = "none"
+std = "luau"
 
 [lints]
 undefined_variable = "allow"

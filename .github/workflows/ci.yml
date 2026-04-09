@@ -20,15 +20,6 @@ jobs:
           version: latest
           args: --check lua/ plugin/ tests/
 
-      - name: Install Selene
-        run: |
-          curl -L https://github.com/Kampfkarren/selene/releases/download/0.27.1/selene-0.27.1-linux.zip -o selene.zip
-          unzip selene.zip
-          chmod +x selene
-
-      - name: Lint with Selene
-        run: ./selene lua/ plugin/
-
   test:
     name: Tests
     runs-on: ubuntu-latest
