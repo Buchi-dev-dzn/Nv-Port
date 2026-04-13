@@ -72,14 +72,6 @@ Run the doctor at any time to verify your tools and paths:
 
 ---
 
-## 🗺️ Roadmap
-
-- [x] **Phase 1: MVP** (Export/Import/Doctor/Analyzer)
-- [ ] **Phase 2: Security & Filtering** (Exclude secrets, `.env`, etc.)
-- [ ] **Phase 3: Automation & Backup** (Auto-backup during import)
-- [ ] **Phase 4: Full Portability** (Standalone installer scripts)
-- [ ] **Phase 5: CLI Mode** (Binary implementation for easy bootstrapping)
-
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve NvPort.
